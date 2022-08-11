@@ -1,0 +1,94 @@
+# примеры API-запросов
+
+@baseUrl = http://localhost:8000/api
+@webUrl = https://probe.fbrq.cloud/v1
+
+# просмотр Всей рассылки (id,text,count Y/n; client.phone, msg.status)
+GET {{baseUrl}}/delivery/
+Content-Type: application/json
+
+###
+
+# просмотр  рассылки по id (all; client.all; msg.status, msg.date_time_send, .status)
+GET {{baseUrl}}/delivery/1/
+Content-Type: application/json
+
+###
+
+# отправка сообщения в стореннее API
+POST {{webUrl}}/send/
+Content-Type: application/json
+
+{
+  "id": 3,
+  "phone": 71234567890,
+  "text": "Срочно",
+}
+
+###
+
+# создание клиента
+POST {{baseUrl}}/client/
+Content-Type: application/json
+
+{
+  "phone": 71234567890,
+  "code_phone": 123,
+  "teg": "teg1",
+  "time_zone": "+3"
+}
+
+###
+
+# удаление клиента
+DELETE {{baseUrl}}/client/2/
+Content-Type: application/json
+
+###
+
+# обновления  атрибутов клиента
+PATCH {{baseUrl}}/client/2/
+Content-Type: application/json
+
+{
+  "phone": 70987654321,
+  "code_phone": 321,
+  "teg": "teg2",
+  "time_zone": "+5"
+}
+
+###
+
+# добавления новой рассылки
+POST {{baseUrl}}/delivery/
+Content-Type: application/json
+
+{
+  "date_time_start": "2016-05-18T15:37:36.993048Z",
+  "text": "Срочно",
+  "filter_code": 321,
+  "filter_teg": "teg2",
+  "date_time_stop": "2023-05-18T15:37:36.993048Z",
+}
+
+###
+
+# обновления  атрибутов рассылки
+PATCH {{baseUrl}}/delivery/2/
+Content-Type: application/json
+
+{
+  "date_time_start": "2022-05-18T15:37:36.993048Z",
+  "text": "Срочно2",
+  "filter_code": 123,
+  "filter_teg": "teg1",
+  "date_time_stop": "2024-05-18T15:37:36.993048Z",
+}
+
+###
+
+# удаление рассылки
+DELETE {{baseUrl}}/delivery/2/
+Content-Type: application/json
+
+###
